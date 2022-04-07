@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}
+Регистрация
+{% endblock %}
+{% block content %}
+<div class="container">
+    {% if form.errors %}
+    <p>There was an error</p>
+    {% endif %}
+    <div class="shadow p-4 mb-5 bg-body rounded">
+    <h1>Регистрация</h1>
+        <form action="{% url 'register_user' %}" method=POST>
+            {% csrf_token %}
+            {{ form.as_p }}
+    <br><br/>
+   <input type="Submit"
+    value="Зарегестрироваться" class="
+    btn btn-secondary">
+        </form>
+    </div>
+</div>
+{% endblock %}
