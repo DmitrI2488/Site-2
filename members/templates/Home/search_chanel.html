@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ chanel.name }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% if search %}
+        <h1>Результаты поиска по запросу {{ search }}:</h1>
+        {% if results %}
+            {% for result in chanels %}
+                <div class="card">
+                    <div class="card-body">
+                        {{ result.name }}
+                        <a href="{% url 'page' result.id %} " class="btn btn-primary">Подробнее</a>
+                    </div>
+
+                </div>
+            {% endfor %}
+                {% if chanels.has_previous %}
+                    <a href="?page={{chanels.previous_page_number}}">Следующая страница</a>
+                {% endif %}
+                Страница {{ chanels.number }} из {{ chanels.paginator.num_pages }}
+                {% if chanels.has_next %}
+                    <a href="?page={{chanels.next_page_number}}">Следующая страница</a>
+                {% endif %}
+        {% else %}
+            <p>По вашему запросу ничего не найдено</p>
+        {% endif %}
+    {% endif %}
+    {% if chanels.has_previous %}
+        <a href="?page={{chanels.previous_page_number}}">Следующая страница</a>
+    {% endif %}
+    Страница {{ chanels.number }} из {{ chanels.paginator.num_pages }}
+    {% if chanels.has_next %}
+        <a href="?page={{chanels.next_page_number}}">Следующая страница</a>
+    {% endif %}
+</div>
+{% endblock %}

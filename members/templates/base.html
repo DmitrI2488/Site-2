@@ -46,8 +46,9 @@
             <a href="{% url 'register_user' %}" type="button" class="btn btn-primary">Регистрация</a>
         </div>
         {% endif %}
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Search">
+      <form class="d-flex" method=POST action="{% url 'search' %}">
+        {% csrf_token %}
+        <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Search", name="search">
         <button class="btn btn-outline-success" type="submit">Поиск</button>
       </form>
     </div>

@@ -16,7 +16,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ rating.name }}</h5>
                             <p class="card-text">{{ rating.text}}</p>
-                            <a href="#" class="btn btn-primary">Подробнее</a>
+                            <a href="{% url 'page' rating.id %}" class="btn btn-primary">Подробнее</a>
                         </div>
                     </div>
         </div>
@@ -34,7 +34,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{ rating.name }}</h5>
                                     <p class="card-text">{{ rating.text}}</p>
-                                    <a href="#" class="btn btn-primary">Подробнее</a>
+                                    <a href="{% url 'page' rating.id %}" class="btn btn-primary">Подробнее</a>
                                 </div>
                             </div>
                 </div>
