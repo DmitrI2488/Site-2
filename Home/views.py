@@ -28,15 +28,11 @@ def search_chanel(request):
         p = Paginator(rating.objects.filter(name__contains=search), 2)
         page = request.GET.get('page')
         chanels = p.get_page(page)
+        request.session['search'] = f'{chanels}'  # это f-строка если чё
         return render(request, 'Home/search_chanel.html',
                       {'search': search,
                        'results': searched,
                        'chanels': chanels})
-    if request.method == 'GET':
-        p = Paginator(rating.objects.filter(name__contains=search), 2)
-        page = request.GET.get('page')
-        chanels = p.get_page(page)
+    else:
         return render(request, 'Home/search_chanel.html',
-                      {'search': search,
-                       'results': searched,
-                       'chanels': chanels})
+                      {})

@@ -28,12 +28,6 @@
             <p>По вашему запросу ничего не найдено</p>
         {% endif %}
     {% endif %}
-    {% if chanels.has_previous %}
-        <a href="?page={{chanels.previous_page_number}}">Следующая страница</a>
-    {% endif %}
-    Страница {{ chanels.number }} из {{ chanels.paginator.num_pages }}
-    {% if chanels.has_next %}
-        <a href="?page={{chanels.next_page_number}}">Следующая страница</a>
-    {% endif %}
+
 </div>
 {% endblock %}
