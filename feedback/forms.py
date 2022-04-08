@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django import forms
-from .models import feedback
+from .models import feedback, review
 
 
 class FeedBack(ModelForm):
@@ -16,9 +16,9 @@ class FeedBack(ModelForm):
         }
 
 
-class review(ModelForm):
+class reviews(ModelForm):
     class Meta:
-        model = feedback
+        model = review
         fields = '__all__'
 
         widgets = {

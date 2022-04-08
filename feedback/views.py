@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import FeedBack
+from .forms import FeedBack, reviews
 
 
 def add_feedback(request):
@@ -18,12 +18,12 @@ def add_feedback(request):
 
 def add_review(request):
     if request.method == 'POST':
-        form = FeedBack(request.POST)
+        form = reviews(request.POST)
         if form.is_valid():
             form.save()
         messages.success(request, ('Ваш запрос отправлен'))
         return redirect('review')
     else:
-        form = FeedBack()
+        form = reviews()
     return render(request, 'feedback/review.html', {'form': form})
 
