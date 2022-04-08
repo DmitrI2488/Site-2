@@ -4,7 +4,43 @@
 {% endblock %}
 {% block content %}
 <div class="container">
-    <h1>Домашняя страница</h1>
-
+    <div class="row">
+    <div class="col-8">
+<div class="container">
+    <h1>Рейтинг</h1>
+  <div class="row row-cols-2">
+    {% for rating in rating_list %}
+      {% if rating.passed == True %}
+        <div class="col"><div class="card" style="width: 18rem;">
+                        <img src="{{ rating.photo.url }}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ rating.name }}</h5>
+                            <p class="card-text">{{ rating.text}}</p>
+                            <a href="#" class="btn btn-primary">Подробнее</a>
+                        </div>
+                    </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+    </div>
+    <div class="col-4">
+        <h3>Не прошли проверку</h3>
+         {% for rating in rating_list %}
+              {% if rating.passed == False %}
+                <div class="col"><div class="card" style="width: 18rem;">
+                                <img src="{{ rating.photo.url }}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ rating.name }}</h5>
+                                    <p class="card-text">{{ rating.text}}</p>
+                                    <a href="#" class="btn btn-primary">Подробнее</a>
+                                </div>
+                            </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+    </div>
+    </div>
 </div>
 {% endblock %}
