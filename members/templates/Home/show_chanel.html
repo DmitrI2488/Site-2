@@ -4,6 +4,31 @@
 {% endblock %}
 {% block content %}
 <div class="container">
-<h1>{{ chanel.name }}</h1>
+    <h1>{{ chanel.name }}</h1>
+    <img src="{{ chanel.photo.url }}" class="card-img-top" alt="..." style="width: 18rem;">
+    <p>{{ chanel.text }}</p>
+    <p>{{ chanel.content }}</p>
+    <h2>Коментарии</h2>
+                <form method=POST>
+                {% csrf_token %}
+                {{ form.as_p }}
+        <br/>
+       <input type="Submit"
+        value="Отправить" class="
+        btn btn-secondary">
+            </form>
+        <br/>
+    {% if not chanel.comments.all %}
+        Коментариев еще нет
+    {% else %}
+        {% for comment in chanel.comments.all %}
+            <strong>
+                {{ comment.name }} - {{ comment.date_added }}
+            </strong>
+            <br/>
+            {{ comment.body }}
+            <br/>
+        {% endfor %}
+    {% endif %}
 </div>
 {% endblock %}

@@ -12,7 +12,7 @@ class FeedBack(ModelForm):
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Имя'}),
             'email': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Email'}),
             'theme': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Тема'}),
-            'message': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ваше сообщение'}),
+            'message': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Ваше сообщение'}),
         }
 
 
@@ -25,5 +25,5 @@ class reviews(ModelForm):
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Имя'}),
             'email': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Email'}),
             'url': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ссылка'}),
-            'message': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ваше сообщение'}),
+            'message': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Ваше сообщение'}),
         }

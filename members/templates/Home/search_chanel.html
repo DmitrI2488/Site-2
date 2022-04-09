@@ -18,11 +18,11 @@
                 </div>
             {% endfor %}
                 {% if chanels.has_previous %}
-                    <a href="?page={{chanels.previous_page_number}}">Следующая страница</a>
+                    <a href="?page={{chanels.previous_page_number}}&pk={{ search }}">Предыдущая страница</a>
                 {% endif %}
                 Страница {{ chanels.number }} из {{ chanels.paginator.num_pages }}
                 {% if chanels.has_next %}
-                    <a href="?page={{chanels.next_page_number}}">Следующая страница</a>
+                    <a href="?page={{chanels.next_page_number}}&pk={{ search }}">Следующая страница</a>
                 {% endif %}
         {% else %}
             <p>По вашему запросу ничего не найдено</p>
