@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'members',
     'feedback',
     'Home',
+    'rating',
 ]
 
 MIDDLEWARE = [

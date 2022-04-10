@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}
+Рейтинг
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+    <div class="col-8">
+<div class="container">
+    <h1>Не прошли проверку</h1>
+<!--  <div class="row row-cols-2">-->
+    {% for ratings in chanels %}
+      {% if ratings.passed == False %}
+        <div class="card">
+            <div class="card-body">
+                <a href="{% url 'page' ratings.id %}"> {{ ratings.name }} </a>
+            </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+<!--  </div>-->
+</div>
+    </div>
+    {% if chanels.has_previous %}
+                    <a href="?page={{chanels.previous_page_number}}&pk={{ search }}">Предыдущая страница</a>
+                {% endif %}
+                Страница {{ chanels.number }} из {{ chanels.paginator.num_pages }}
+                {% if chanels.has_next %}
+                    <a href="?page={{chanels.next_page_number}}&pk={{ search }}">Следующая страница</a>
+                {% endif %}
+</div>
+{% endblock %}

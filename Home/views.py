@@ -5,21 +5,20 @@ from Home.models import rating
 from django.core.paginator import Paginator
 from .forms import CommentForm
 
-def add_feedback(request):
-    if request.method == 'POST':
-        form = FeedBack(request.POST)
-        if form.is_valid():
-            form.save()
-        messages.success(request, ('Ваше сообщение отправлено'))
-        return redirect('feedback')
-    else:
-        form = FeedBack()
-    return render(request, 'feedback/feedback.html', {'form': form})
+# def add_feedback(request):
+#     if request.method == 'POST':
+#         form = FeedBack(request.POST)
+#         if form.is_valid():
+#             form.save()
+#         messages.success(request, ('Ваше сообщение отправлено'))
+#         return redirect('feedback')
+#     else:
+#         form = FeedBack()
+#     return render(request, 'feedback/feedback.html', {'form': form})
 
 
 def show_chanel(request, chanel_id):
     ratings = get_object_or_404(rating, pk=chanel_id)
-    print(ratings)
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -37,8 +36,8 @@ def show_chanel(request, chanel_id):
 
 def all_events(request):
     rating_list = rating.objects.all()
-    for ratings in rating_list:
-        print(ratings.name)
+    # for ratings in rating_list:
+    #     print(ratings.name)
     return render(request, 'Home/home.html', {
         'rating_list': rating_list
     })
