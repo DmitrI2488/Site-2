@@ -13,11 +13,18 @@
                 {% csrf_token %}
                 {{ form.as_p }}
         <br/>
-       <input type="Submit"
-        value="Отправить" class="
-        btn btn-secondary">
+       <a href="?={{ chanel.id }}&pk={{ chanel.id }}" type="Submit" class="
+        btn btn-secondary"> Отправить </a>
             </form>
         <br/>
+    <form action="?={{ chanel.id }}&pk={{ chanel.id }}" method=POST>
+            {% csrf_token %}
+            {{ form.as_p }}
+
+    <input type="Submit"
+    value="Submit" class="
+    btn btn-secondary">
+        </form>
     {% if not chanel.comments.all %}
         Коментариев еще нет
     {% else %}

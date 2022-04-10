@@ -8,7 +8,9 @@
     <div class="col-8">
             {% if messages %}
         {% for message in messages %}
+        <div class="alert alert-success" role="alert">
             {{ message }}
+        </div>
         {% endfor %}
     {% endif %}
     <h1>Каналы и аккаунты на проверку</h1>
@@ -24,7 +26,22 @@
     btn btn-secondary">
         </form>
     </div>
-    <div class="col-4">Карточки</div>
+    <div class="col-4">
+        <h3>Не прошли проверку</h3>
+         {% for rating in chanels %}
+              {% if rating.passed == False %}
+                <div class="col"><div class="card" style="width: 18rem;">
+                                <img src="{{ rating.photo.url }}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ rating.name }}</h5>
+                                    <p class="card-text">{{ rating.text}}</p>
+                                    <a href="{% url 'page' rating.id %}" class="btn btn-primary">Подробнее</a>
+                                </div>
+                            </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+    </div>
     </div>
 </div>
 {% endblock %}

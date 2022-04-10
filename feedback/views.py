@@ -2,9 +2,11 @@ from django.shortcuts import render
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import FeedBack, reviews
+from Home.models import rating
 
 
 def add_feedback(request):
+    chanels = rating.objects.all()
     if request.method == 'POST':
         form = FeedBack(request.POST)
         if form.is_valid():
@@ -13,10 +15,12 @@ def add_feedback(request):
         return redirect('feedback')
     else:
         form = FeedBack()
-    return render(request, 'feedback/feedback.html', {'form': form})
+    return render(request, 'feedback/feedback.html', {'form': form,
+                                                      'chanels': chanels})
 
 
 def add_review(request):
+    chanels = rating.objects.all()
     if request.method == 'POST':
         form = reviews(request.POST)
         if form.is_valid():
@@ -25,5 +29,6 @@ def add_review(request):
         return redirect('review')
     else:
         form = reviews()
-    return render(request, 'feedback/review.html', {'form': form})
+    return render(request, 'feedback/review.html', {'form': form,
+                                                    'chanels': chanels})
 

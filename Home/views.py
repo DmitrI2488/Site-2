@@ -1,9 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 
-from Home.models import rating
+from Home.models import rating, Comment
 
 from django.core.paginator import Paginator
 from .forms import CommentForm
+import sqlite3
 
 # def add_feedback(request):
 #     if request.method == 'POST':
@@ -18,16 +19,28 @@ from .forms import CommentForm
 
 
 def show_chanel(request, chanel_id):
-    ratings = get_object_or_404(rating, pk=chanel_id)
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
-            comment = form.save()
-            comment.chanel = ratings
-            comment.save()
+            chanelss = request.GET.get('pk')
+            name = form.cleaned_data
+            names = name['name']
+            body = name['body']
+            print(names, body, chanelss)
+            # conn = sqlite3.connect("db.sqlite3")
+            # cursor = conn.cursor()
+            # cursor.execute(f"INSERT INTO Home_comment VALUES ('{chanelss}','{names}','{body}')")
+            # conn.commit()
+            # cursor.close()
+            # conn.close()
+            # comments = Comment.objects.get(pk=1)
+            # s = Comment.objects.create(chanel_id=chanelss, name=name, body=body)
+            # comments.chanel.add(s)
+            b = Comment(chanel_id=chanelss, name=names, body=body)
+            Comment.save()
     else:
         chanel = rating.objects.get(pk=chanel_id)
-        form = CommentForm
+        form = CommentForm()
         return render(request, 'Home/show_chanel.html', {
             'chanel': chanel,
             'form': form,
@@ -56,6 +69,7 @@ def search_chanel(request):
                        'chanels': chanels})
     else:
         pk = request.GET.get('pk')
+        print(pk)
         searched = rating.objects.filter(name__contains=pk)
         p = Paginator(rating.objects.filter(name__contains=pk), 2)
         page = request.GET.get('page')
