@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
 from Home.models import rating, Comment
 
@@ -26,24 +26,20 @@ def show_chanel(request, chanel_id):
             name = form.cleaned_data
             names = name['name']
             body = name['body']
-            print(names, body, chanelss)
-            # conn = sqlite3.connect("db.sqlite3")
-            # cursor = conn.cursor()
-            # cursor.execute(f"INSERT INTO Home_comment VALUES ('{chanelss}','{names}','{body}')")
-            # conn.commit()
-            # cursor.close()
-            # conn.close()
-            # comments = Comment.objects.get(pk=1)
-            # s = Comment.objects.create(chanel_id=chanelss, name=name, body=body)
-            # comments.chanel.add(s)
-            b = Comment(chanel_id=chanelss, name=names, body=body)
-            Comment.save()
+            temp = form.save(commit=False)
+            temp.chanel_id = chanelss
+            temp.save()
+        return redirect('page', chanel_id)
     else:
         chanel = rating.objects.get(pk=chanel_id)
         form = CommentForm()
+        comment = Comment.objects.filter(chanel_id = chanel_id)
+        for chanel1 in comment:
+            print(chanel1)
         return render(request, 'Home/show_chanel.html', {
             'chanel': chanel,
             'form': form,
+            'comment': comment,
         })
 
 

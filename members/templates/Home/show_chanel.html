@@ -9,26 +9,17 @@
     <p>{{ chanel.text }}</p>
     <p>{{ chanel.content }}</p>
     <h2>Коментарии</h2>
-                <form method=POST>
-                {% csrf_token %}
-                {{ form.as_p }}
-        <br/>
-       <a href="?={{ chanel.id }}&pk={{ chanel.id }}" type="Submit" class="
-        btn btn-secondary"> Отправить </a>
-            </form>
-        <br/>
     <form action="?={{ chanel.id }}&pk={{ chanel.id }}" method=POST>
             {% csrf_token %}
             {{ form.as_p }}
-
     <input type="Submit"
     value="Submit" class="
     btn btn-secondary">
         </form>
-    {% if not chanel.comments.all %}
+    {% if not comment.all %}
         Коментариев еще нет
     {% else %}
-        {% for comment in chanel.comments.all %}
+        {% for comment in comment.all %}
             <strong>
                 {{ comment.name }} - {{ comment.date_added }}
             </strong>

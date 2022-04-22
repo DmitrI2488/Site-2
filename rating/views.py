@@ -8,9 +8,12 @@ def ratings(request):
     rat = Paginator(rating.objects.all(), 8)
     page = request.GET.get('page')
     chanels = rat.get_page(page)
+    rating_list = rating.objects.all()
     return render(request, 'rating/rating.html',
                   {'chanels': chanels,
-                   'chanel': alla})
+                   'chanel': alla,
+                   'rating_list': rating_list
+                   })
 
 
 def failed(request):

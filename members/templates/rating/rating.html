@@ -1,54 +1,201 @@
-{% extends 'base.html' %}
-{% block title %}
-Рейтинг
-{% endblock %}
-{% block content %}
-<div class="container">
-    <div class="row">
-    <div class="col-8">
-<div class="container">
-    <h1>Рейтинг</h1>
-<!--  <div class="row row-cols-2">-->
-    {% for ratings in chanels %}
-      {% if ratings.passed == True %}
-        <div class="card">
-            <div class="card-body">
-                <a href="{% url 'page' ratings.id %}"> {{ ratings.name }} </a>
-            </div>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <!-- Bootstrap Bundle JS (jsDelivr CDN) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'rating/style.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body>
+
+</div><header class="vrapper">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      
+
+        <div class="logo">
+          <a href="{% url 'home' %}" class="logo_link" >
+          <img src="{% static 'rating/images/svg/logo.svg' %}"  class="logo_link" width="90" height="90">
+        </a>
         </div>
-      {% endif %}
-    {% endfor %}
-<!--  </div>-->
-</div>
+
+
+        <div class="menu_burger">
+          <img src="{% static 'rating/images/svg/menu.svg' %}" class="menuu" height="30px" weight="30px" alt="menu">
+        </div> 
+        
+        <nav class="header_nav">
+          <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="{% url 'rating' %}" class="top-menu_item" >Рейтинг</a></li>
+                <div class="sub-menu">
+                    <ul>
+                      <li><a href="#" class="sub-menu_item">1</a></li>
+                      <li><a href="#" class="sub-menu_item">2</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li><a href="{% url 'failed' %}" class="top-menu_item">Не прошли проверку</a></li>
+            <li><a href="{% url 'feedback' %}" class="top-menu_item">Обратная связь</a>
+              <div class="sub-menu">
+                <ul>
+                  <li><a href="#" class="sub-menu_item">1</a></li>
+                  <li><a href="#" class="sub-menu_item">2</a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="block">
+          <a class="tel" href="#">Телеграмм канал</a>
+          <a class="tel" href="#">Телеграмм канал</a>
+        </div>
+        <div class="text-end">
+          <a href="{% url 'login_user' %}" type="button" class="btn btn-outline-light me-2">Вход</a>
+          <a href="{% url 'register_user' %}" type="button" class="btn btn-outline-light me-2">Регистрация</a>
+        </div>
+        <form class="form_special" name="q" method=POST action="{% url 'search' %}">
+            {% csrf_token %}
+        <input class="header_search" type="search"  placeholder="Введите название канала" aria-label="Search", name="search">
+        </form>
+      </div>
+
+    
     </div>
-    <div class="col-4">
-        <h3>Не прошли проверку</h3>
-         {% for rating in chanel %}
-              {% if rating.passed == False %}
-                <div class="card">
-                    <div class="card-body">
-                        <a href="{% url 'page' rating.id %}"> {{ rating.name }} </a>
+    <div class="popup">
+      <nav class="header__nav_active">
+      <ul class="header_list">
+          <li class="header_item">
+              <a href="#" class="header_link">Рейтинг</a>
+              <div class="sub-menu">
+                <ul>
+                  <li><a href="#" class="sub-menu_item">1</a></li>
+                  <li><a href="#" class="sub-menu_item">2</a></li>
+                </ul>
+            </div>
+          </li>
+          <li class="header_item">
+              <a href="#" class="header_link">Не прошли проверку</a>
+          </li>
+          <li class="header_item">
+              <a href="#" class="header_link">Обратная связь</a>
+              <div class="sub-menu">
+                <ul>
+                  <li><a href="#" class="sub-menu_item">1</a></li>
+                  <li><a href="#" class="sub-menu_item">2</a></li>
+                </ul>
+            </div>
+          </li>
+          <li class="header_item">
+            <a href="#" class="header_link">Вход</a>
+        </li>
+        <li class="header_item">
+          <a href="#" class="header_link">Регистрация</a>
+      </li>
+      </ul>
+      </nav>
+  </div>
+  </header>
+</br>
+</br>
+</br>
+
+<div class="container2">
+  <div class="main-container">
+    <div class="left-container">
+  <h2>Рейтинг</h2>
+</br>
+</br>
+{% for rating in rating_list %}
+{% if rating.passed == True %}
+  <div class="card">
+    <div class="card_img">
+        <img src="{{ rating.photo.url }}" alt="" class="card_img2">
+    </div> 
+    <div class="card_text">
+        {{ rating.name }}
+    </div>
+    <a  href="{% url 'page' rating.id %}" class="btn-form1">
+      Обзор
+    </a> 
+    <a href="#" class="btn-form2">
+      На сайт
+    </a> 
+  </div>
+  {% endif %}
+{% endfor %}
+
+</div>
+  <div class="right-container">
+    <div class="pad">
+      <div class="title_2">Не прошли проверку</div>
+      <div class="grid_2">
+        {% for rating in rating_list %}
+            {% if rating.passed == False %}
+                <div class="card_2">
+                    <a href="{% url 'page' rating.id %}">
+                    <img src="{{ rating.photo.url }}" width="176" height="110" alt="card2_img" class="card2_img">
+                    </a>
+                    <div class="card2_name">
+                        {{ rating.name }}
                     </div>
                 </div>
-<!--                <div class="col"><div class="card" style="width: 18rem;">-->
-<!--                                <img src="{{ rating.photo.url }}" class="card-img-top" alt="...">-->
-<!--                                <div class="card-body">-->
-<!--                                    <h5 class="card-title">{{ rating.name }}</h5>-->
-<!--                                    <p class="card-text">{{ rating.text}}</p>-->
-<!--                                    <a href="{% url 'page' rating.id %}" class="btn btn-primary">Подробнее</a>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                </div>-->
-              {% endif %}
-            {% endfor %}
+          {% endif %}
+        {% endfor %}
     </div>
-    </div>
-    {% if chanels.has_previous %}
-                    <a href="?page={{chanels.previous_page_number}}&pk={{ search }}">Предыдущая страница</a>
-                {% endif %}
-                Страница {{ chanels.number }} из {{ chanels.paginator.num_pages }}
-                {% if chanels.has_next %}
-                    <a href="?page={{chanels.next_page_number}}&pk={{ search }}">Следующая страница</a>
-                {% endif %}
+      </div>
+  </div>  
+  </div>  
+  </div>
 </div>
-{% endblock %}
+
+<footer class="py-5">
+  <div class="wrapper2">
+      <div class="rows">
+          <div class="blocks">
+              <div class="textff">
+                  <h5>Контакты</h5>
+              </div>
+              <ul class="footer_menu">
+                  <a class="textf" href="#">Телеграмм канал</a>
+              
+                  <a class="textf" href="#">Телеграмм канал</a>
+          
+                  <a class="textf" href="#">Телеграмм канал</a>
+              </ul>
+          </div>	
+          <div class="blocks">
+              <div class="textff">
+                  <h5>Страницы</h5>
+              </div>
+              <ul class="footer_menu">
+                  <a class="textf" href="{% url 'feedback' %}">Обратная связь</a>
+              
+                  <a class="textf" href="{% url 'review' %}">Проверка каналов и аккаунтов</a>
+              </ul>
+          </div>
+          <div class="blocks">
+              <div class="textff">
+                  <h5>Категории</h5>
+              </div>
+              <ul class="footer_menu">
+                  <a class="textf" href="{% url 'rating' %}">Рейтинг каналов</a>
+              
+                  <a class="textf" href="{% url 'failed' %}">Не прошли проверку</a>
+              </ul>
+          </div>
+      
+      
+  </div>
+</div>
+</footer>
+  <script src="{% static 'rating/js/burger.js' %}"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+</body>
