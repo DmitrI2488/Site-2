@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-ruuel7c6&d!@n1b_k9nwg$4i$_n4u+esb=9$yfa7e^m139u1ul
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['5512-8-41-37-230.eu.ngrok.io', '127.0.0.1']
 LOGOUT_REDIRECT_URL = '/'
 
 
@@ -135,6 +135,7 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+CSRF_TRUSTED_ORIGINS = ['https://5512-8-41-37-230.eu.ngrok.io', 'https://127.0.0.1']
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

@@ -6,6 +6,7 @@ from Home.models import rating
 
 
 def add_feedback(request):
+    rating_list = rating.objects.all()
     chanels = rating.objects.all()
     if request.method == 'POST':
         form = FeedBack(request.POST)
@@ -16,7 +17,9 @@ def add_feedback(request):
     else:
         form = FeedBack()
     return render(request, 'feedback/feedback.html', {'form': form,
-                                                      'chanels': chanels})
+                                                      'chanels': chanels,
+                                                      'rating_list': rating_list
+                                                      })
 
 
 def add_review(request):
