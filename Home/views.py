@@ -22,11 +22,11 @@ def show_chanel(request, chanel_id):
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
+            if request.user.is_authenticated:
+                username = request.user.username
             chanelss = request.GET.get('pk')
-            name = form.cleaned_data
-            names = name['name']
-            body = name['body']
             temp = form.save(commit=False)
+            temp.name = username
             temp.chanel_id = chanelss
             temp.save()
         return redirect('page', chanel_id)
@@ -34,8 +34,6 @@ def show_chanel(request, chanel_id):
         chanel = rating.objects.get(pk=chanel_id)
         form = CommentForm()
         comment = Comment.objects.filter(chanel_id = chanel_id)
-        for chanel1 in comment:
-            print(chanel1)
         return render(request, 'Home/show_chanel.html', {
             'chanel': chanel,
             'form': form,
@@ -74,3 +72,14 @@ def search_chanel(request):
                {'search': pk,
                 'results': searched,
                 'chanels': chanels})
+
+
+def delete_comment(request, comment_id):
+    coment = Comment.objects.get(pk = comment_id)
+    if request.user.username == coment.name or request.user.is_staff:
+        chanel_id = coment.chanel_id
+        print(coment)
+        coment.delete()
+        return redirect('page', chanel_id)
+    else:
+        return redirect('home')

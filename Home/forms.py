@@ -6,8 +6,8 @@ from Home.models import Comment
 class CommentForm(ModelForm):
     class Meta:
         model = Comment
-        fields = ('name', 'body')
+        fields = ('body',)
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Имя'}),
+            # 'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Имя'}),
             'body': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ваш коментарий'}),
         }

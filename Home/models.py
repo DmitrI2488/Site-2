@@ -20,6 +20,6 @@ class Comment(models.Model):
     name = models.CharField(max_length=255)
     body = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)
-
+    only_user = models.BooleanField(default=False)
     def __str__(self):
         return f'{self.chanel.name} - {self.name}'

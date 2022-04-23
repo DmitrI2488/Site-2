@@ -19,13 +19,28 @@
     {% if not comment.all %}
         Коментариев еще нет
     {% else %}
-        {% for comment in comment.all %}
-            <strong>
-                {{ comment.name }} - {{ comment.date_added }}
-            </strong>
-            <br/>
-            {{ comment.body }}
-            <br/>
+        {% for comments in comment.all %}
+            {% if comments.only_user == True and user.username == comments.name or user.is_authenticated and user.is_staff %}
+                <strong>
+                    {{ comments.name }} - {{ comments.date_added }}
+                </strong>
+                <br/>
+                {{ comments.body }}
+                <br/>
+                {% if user.is_authenticated and user.is_staff %}
+                    <a href="{% url 'delete' comments.id %}" type="button" class="btn btn-danger">Danger</a>
+                {% endif %}
+            {% elif comments.only_user == False %}
+                <strong>
+                    {{ comments.name }} - {{ comments.date_added }}
+                </strong>
+                <br/>
+                {{ comments.body }}
+                <br/>
+                {% if user.is_authenticated and user.is_staff %}
+                    <a href="{% url 'delete' comments.id %}" type="button" class="btn btn-danger">Danger</a>
+                {% endif %}    
+            {% endif %}
         {% endfor %}
     {% endif %}
 </div>
