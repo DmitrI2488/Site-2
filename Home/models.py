@@ -21,5 +21,8 @@ class Comment(models.Model):
     body = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)
     only_user = models.BooleanField(default=False)
+    rate = models.TextField(null=False, default=0)
+    rate1 = models.TextField(null=False, default=0)
+    rate2 = models.TextField(null=False, default=0)
     def __str__(self):
-        return f'{self.chanel.name} - {self.name}'
+        return f'{self.body}'

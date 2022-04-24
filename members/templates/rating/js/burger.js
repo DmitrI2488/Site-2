@@ -1,11 +1,13 @@
 // $('body').hide()
 document.addEventListener('DOMContentLoaded', function(){
-    function toggleMenu(){
-        $('.menuu').toggleClass('menuu_active')
-        $('.popup').toggleClass('popup_active')
+    function toggleMenu1(){
+        $('.star-5').toggleClass('.star')
+        $('.ratings1').toggleName('rating')
     }
 
-$('.menuu').click(function(){ toggleMenu() })
+
+$('.star-5').click(function(){ toggleMenu1() })
+
 
 function closeMenu() {
     $('.menu-toggle').removeClass('menu-toggle_active')
