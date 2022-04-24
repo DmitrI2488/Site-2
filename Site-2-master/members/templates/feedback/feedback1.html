@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}
+
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+    <div class="col-8">
+<!--        <div class="alert alert-success" role="alert">-->
+<!--  Это уведомление об успехе — check it out!-->
+<!--</div>-->
+            {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success" role="alert">
+            {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <h1>Обратная связь</h1>
+    <p>
+        Мы один из немногих, честных рейтингов каналов по инвестициям. Мы просто УКАЗАТЬ. Мы стараемся писать максимально честные
+        обзоры и не нарушать права пользователей. В случае любых проблем, смело пишите нам на почту и мы постараемся
+        быстро исправить все спорные моменты.
+    </p>
+        <form method=POST>
+            {% csrf_token %}
+            {{ form.as_p }}
+    <br><br/>
+   <input type="Submit"
+    value="Отправить" class="
+    btn btn-secondary">
+        </form>
+    </div>
+    <div class="col-4">
+        <h3>Не прошли проверку</h3>
+         {% for rating in chanels %}
+              {% if rating.passed == False %}
+                <div class="col"><div class="card" style="width: 18rem;">
+                                <img src="{{ rating.photo.url }}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ rating.name }}</h5>
+                                    <p class="card-text">{{ rating.text}}</p>
+                                    <a href="{% url 'page' rating.id %}" class="btn btn-primary">Подробнее</a>
+                                </div>
+                            </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+    </div>
+    </div>
+</div>
+{% endblock %}

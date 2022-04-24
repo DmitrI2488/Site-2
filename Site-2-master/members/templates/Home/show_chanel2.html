@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ chanel.name }}
+{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>{{ chanel.name }}</h1>
+    <img src="{{ chanel.photo.url }}" class="card-img-top" alt="..." style="width: 18rem;">
+    <p>{{ chanel.text }}</p>
+    <p>{{ chanel.content }}</p>
+    <h2>Коментарии</h2>
+    <form action="?={{ chanel.id }}&pk={{ chanel.id }}" method=POST>
+            {% csrf_token %}
+            {{ form.as_p }}
+    <input type="Submit"
+    value="Submit" class="
+    btn btn-secondary">
+        </form>
+    {% if not comment.all %}
+        Коментариев еще нет
+    {% else %}
+        {% for comments in comment.all %}
+            {% if comments.only_user == True and user.username == comments.name or user.is_authenticated and user.is_staff %}
+                <strong>
+                    {{ comments.name }} - {{ comments.date_added }}
+                </strong>
+                <br/>
+                {{ comments.body }}
+                <br/>
+                {% if user.is_authenticated and user.is_staff %}
+                    <a href="{% url 'delete' comments.id %}" type="button" class="btn btn-danger">Danger</a>
+                {% endif %}
+            {% elif comments.only_user == False %}
+                <strong>
+                    {{ comments.name }} - {{ comments.date_added }}
+                </strong>
+                <br/>
+                {{ comments.body }}
+                <br/>
+                {% if user.is_authenticated and user.is_staff %}
+                    <a href="{% url 'delete' comments.id %}" type="button" class="btn btn-danger">Danger</a>
+                {% endif %}    
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}
